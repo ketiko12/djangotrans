@@ -1,0 +1,63 @@
+{%extends "base/base.html" %} {% block start %} {% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login page</title>
+  </head>
+  <body>
+    {% block start %}
+    <section class="section-content padding-y" style="min-height: 84vh">
+      <div class="card-body">
+      <h4 class="card-title mb-4">Sign in</h4>
+
+      <form action="">
+        <div class="form-group" method="POST">
+            {% csrf_token %}
+            {% include "base/alert.html" %}
+          <input
+            type="text"
+            class="form-control"
+            name="first_name"
+            placeholder="Firstname" required
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="last_name"
+            placeholder="Lastname" required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="email"
+            placeholder="Email" required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name=""
+            placeholder="Password" required
+          />
+        </div>
+        <div class="form-group">
+          <a href="" class="float-right">Forget password</a>
+          <label
+            for=""
+            class="float-left custom-control custom-checkbox"
+          ></label>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit">Register</button>
+        </div>
+      </form>
+      </div>
+    </section>
+  </body>
+</html>

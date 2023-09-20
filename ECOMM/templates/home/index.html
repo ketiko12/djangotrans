@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% block start %}
+<div class="container mt-5 pt-5">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"><img src="/media/{{product.product_images.first.image}}/5.jpg" alt=""></div>
+                <figcaption class="info-wrap border-top">
+                    <a href="{% url 'get_product' product.slug %}" class="title">{{product.product_nam}}</a>
+                    <div class="price mt-2">${{product.price}}.00</div>
+                </figcaption>
+            </figure>
+        </div>
+        {% endfor %}
+        <!-- <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap">
+                    <img src="..images/items/6.png" alt="">
+                    <span class="topbar">
+                        <a href="" class="float-right"> <i class="fa fa-heart"></i></a>
+                    </span>
+                </div>
+            </figure>
+        </div>
+
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"><img src="../images/items/1.png" alt=""></div>
+                <figcaption class="info-wrap border-top text-center">
+                    <small class="text-uppercase font-weight-bolder text-warning">Electrocuted jeans</small>
+                    <p><a href="" class="title">IKEA Poang Swivel Chair</a></p>
+                </figcaption>
+            </figure>
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div> -->
+
+{% endblock %}

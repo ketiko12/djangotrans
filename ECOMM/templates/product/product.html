@@ -1,0 +1,54 @@
+{% extends base/base.html %}
+
+{% block start %}
+
+    <div class="col-md-3">
+        <figure class="card card-product-grid">
+            <div class="img-wrap"><img src="../images/items/1.png" alt=""></div>
+            <figcaption class="info-wrap border-top text-center">
+                <small class="text-uppercase font-weight-bolder text-warning">Electroluxury instruments</small>
+            <p><a href="#" class="title"></a></p>
+            </figcaption> 
+        </figure>
+
+        <div class="thumbs-wrap">
+            {% for image in product.product_images.all %}
+            <a href="" class="item-thumb">
+                <img src="/media/{{image.image}}" alt="">
+            </a>
+            {% endfor %}
+        </div>
+        <article class="conent-body">
+            <h2 class="title">{{product.product_name}}</h2>
+            <div class="mb-3">
+                <var class="pric h4">
+                    {% if updated_price %}
+                    {% updated_price %}
+                    {% else %}
+                    ${{product.price}}
+                    {% endif %}
+                
+                .00</var>
+            </div>
+            <p>{{product.product_description}}</p>
+        </article>
+       {% if product.size_variant.count %}
+        <div class="form-group col-md">
+            <label for="">Select Size</label>
+            <div class="mt-1">
+                {% for size in product.size_variant.all %}
+                 <label for="" class="custom-control custom-radio custom-control-inline">
+                    <input type="radio"  onchange="get_correct_price('{{size.size_name}}')" {% if selected_size==size.size_name %} checked {%endif %} class="custom-control-input">
+                    <div class="custom-control-label">{{size.size_name}}</div>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <script>
+        function get_correct_price(size){
+            window.location.href= window.location.pathname + '?size=${size}'
+        }
+    </script>
+{% endblock %}

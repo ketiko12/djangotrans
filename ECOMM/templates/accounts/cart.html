@@ -1,0 +1,66 @@
+<aside class="col-md-3">
+    <div class="card mb-3">
+        <div class="card-body">
+            <form method="POST">
+                {% 'include base/alert.html' %}
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Have coupon?</label>
+                    <div class="input-group">
+                        <input type="text" name="coupon" class="form-control">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </span>
+                    </div>
+                    .
+               
+                </div>
+            {%if cart.coupon %}    
+             <a href={% url 'remove_coupon' cart.uid %}>{{cart.coupon.coupon_code}}</a>
+            {% endif %}
+            </form>
+        </div>
+        <div class="card-body border-top">
+            <button id="rzp-button" class="btn btn-primary float-md-right">Make Purchase</button>
+            <a href="" class="btn btn-light"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </div>
+</aside>
+<script>
+    var options={
+        "key": "rzp_test_Bz5fpUbrVpovPw",
+        "amount":"{{payment.amount}}",
+        "currency":"INR",
+        "name":"Ecomm",
+        "description":"Purchases",
+        "image":"https:/example.com/your_logo",
+        "order_id":"{{payment.id}}",
+        "handler": function(response){
+            window.location.href= "http://127.0.0.1:8000/accounts/success/?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_payment_signature=${response.razorpay_payment_signature}"
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature);
+        },
+
+        "theme":{
+            "color":"#3399cc"
+        }
+    };
+    
+    var rzp= new Razorpay(options);
+    rzp.on('payment.failed', function(response){
+        alert(response.error.code);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.description);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+    });
+
+    document.getElementById('rzp-button1').onclick= function(e){
+        rzp.open();
+        e.preventDefault();
+    }
+    
+</script>
